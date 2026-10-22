@@ -21,16 +21,7 @@ def parse_sysml(path):
         if not attrs:            # skips the assembly wrapper and part defs
             continue
 
-        req = {
-            "part_name": name,
-            "part_type": attrs.get("partType", ""),
-            "function": attrs.get("function", ""),
-            "material": attrs.get("material", ""),
-            "mounting": attrs.get("mounting", ""),
-            "load_capacity_kg": attrs.get("loadRatingKn", ""),
-            "dimensions_mm": {k: v for k, v in attrs.items() if k not in _SPECIAL},
-        }
-        parts.append(req)
+        parts.append({"part_name": name, "attributes": attrs})
 
     return parts
 
